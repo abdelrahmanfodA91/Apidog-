@@ -1,21 +1,52 @@
 name: Automated API Tests
+ 
+on:
 
-on: [push, pull_request]
+  push:
 
+  pull_request:
+ 
 jobs:
+
   build:
+
     runs-on: ubuntu-latest
-
+ 
     steps:
-    - uses: actions/checkout@v3
 
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - uses: actions/checkout@v3
+ 
+      - name: Setup Node.js environment
 
-    - name: Install Apidog CLI
-      run: npm install -g apidog-cli
+        uses: actions/setup-node@v4
 
-    - name: Running Test Scenario
-      run: apidog run --access-token adgp_5ab888TTQriGHc7SB4m7SVW2m1Dt4SgcA2m8 -t 1833253 -e 5854695 -n 1 -r html,cli
+        with:
+
+          node-version: '18'
+ 
+      - name: Install Apidog CLI
+
+        run: npm install -g apidog-cli
+ 
+      - name: Running Test Scenario
+
+        continue-on-error: true
+
+        env:
+
+          APIDOG_ACCESS_TOKEN: ${{ secrets.APIDOG_ACCESS_TOKEN }}
+
+        run: |
+
+          apidog run \
+
+            --access-token "$APIDOG_ACCESS_TOKEN" \
+
+            -t 1833253 \
+
+            -e 5854695 \
+
+            -n 1 \
+
+            -r html,cli
+ 
