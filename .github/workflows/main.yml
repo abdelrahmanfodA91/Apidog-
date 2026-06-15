@@ -40,7 +40,7 @@ jobs:
 
           apidog run \
 
-            --access-token "$APIDOG_ACCESS_TOKEN" \
+            --access-token "adgp_5ab888TTQriGHc7SB4m7SVW2m1Dt4SgcA2m8" \
 
             -t 1833253 \
 
