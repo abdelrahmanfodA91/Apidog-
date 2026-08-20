@@ -9,4 +9,5 @@ jobs:
     steps:
     - name: Running Test Scenario
       continue-on-error: true
+      shell: cmd
       run: apidog run --access-token ${{secrets.APIDOG_ACCESS_TOKEN}} -t 5079 -e 6528501 -n 1 -r html,cli
